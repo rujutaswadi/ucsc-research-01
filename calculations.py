@@ -207,10 +207,36 @@ def calculations(black_occurences, white_occurences):
     
     return statistics
 
-black_counts = get_black_occurences()
-white_counts = get_white_occurences()
+def read_stats():
+    black_counts = get_black_occurences()
+    white_counts = get_white_occurences()
 
-statistics = calculations(black_counts, white_counts)
+    statistics = calculations(black_counts, white_counts)
 
-for key in statistics.keys():
-    print("name: ", key, statistics[key])
+    stats = []
+
+
+    for key in statistics.keys():
+        output_row = []
+        output_row.append(key)
+        output_row.append(statistics[key])
+        stats.append(output_row)
+        #print("name: ", key, statistics[key])
+
+    
+    #print(stats)
+    return stats
+
+
+
+def write_statistics():
+    with open ('/Users/rujuta/Desktop/research_project/statistics.csv', 'w', newline='') as output:
+        stats = read_stats()
+
+        writer = c.writer(output)
+
+        writer.writerow(['name', 'black_percentage'])
+
+        writer.writerows(stats)
+
+write_statistics()
