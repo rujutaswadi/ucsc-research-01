@@ -215,11 +215,11 @@ def read_stats():
 
     stats = []
 
-
     for key in statistics.keys():
         output_row = []
         output_row.append(key)
         output_row.append(statistics[key])
+        output_row.append(1-statistics[key])
         stats.append(output_row)
         #print("name: ", key, statistics[key])
 
@@ -235,8 +235,8 @@ def write_statistics():
 
         writer = c.writer(output)
 
-        writer.writerow(['name', 'black_percentage'])
+        writer.writerow(['name', 'black_percentage', 'white_percentage'])
 
         writer.writerows(stats)
 
-write_statistics()
+write_statistics() #runs everything
