@@ -50,7 +50,7 @@ def read_stats():
 
 
 def write_statistics():
-    with open ('/Users/rujuta/Desktop/research_project/statistics.csv', 'w', newline='') as output:
+    with open ('/Users/rujuta/work/ucsc-research-01/statistics.csv', 'w', newline='') as output:
         stats = read_stats()
 
         writer = c.writer(output)
@@ -58,3 +58,4 @@ def write_statistics():
         writer.writerow(['name', 'black_percentage', 'white_percentage'])
 
         writer.writerows(stats)
+        
