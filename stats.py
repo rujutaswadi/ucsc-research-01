@@ -11,7 +11,9 @@ def calculations(black_occurences, white_occurences):
         if name in unique_names == False: #can i say if not key in unique_names?
             unique_names.append(name)
     
-    statistics = {}
+    black_percentage = {}
+    x_axis = {}
+    total_people = 0
 
     for name in unique_names:
         if name in black_names:
@@ -23,25 +25,60 @@ def calculations(black_occurences, white_occurences):
         else:
             white_count = 0 
         
-        statistics[name] = (black_count) / (black_count + white_count)
+        black_percentage[name] = (black_count) / (black_count + white_count)
+        
+        if name in black_names:
+            x_axis[name] = black_count / (black_count + white_count) #AA name/people with that name
     
-    return statistics
+        total_people = total_people + black_count + white_count
+
+    y_axis = {}
+    #print(total_people)
+
+    for name in unique_names:
+        if name in black_names:
+            black_count = black_occurences[name]
+        else:
+            black_count = 0
+        if name in white_names:
+            white_count = white_occurences[name]
+        else:
+            white_count = 0
+
+        y_axis[name] = (black_count + white_count) / total_people
+    
+    #return black_percentage #add x axis, add y axis
+    return black_percentage, x_axis, y_axis
 
 def read_stats():
     black_counts = comp.get_black_occurences()
     white_counts = comp.get_white_occurences()
 
-    statistics = calculations(black_counts, white_counts)
+    #statistics = calculations(black_counts, white_counts)
+
+    black_percentage, x_axis, y_axis = calculations(black_counts, white_counts)
+    
 
     stats = []
 
-    for key in statistics.keys():
+    for key in black_percentage.keys():
         output_row = []
         output_row.append(key)
-        output_row.append(statistics[key])
-        output_row.append(1-statistics[key])
+        output_row.append(black_percentage[key])
+        output_row.append(x_axis[key])
+        output_row.append(y_axis[key])
         stats.append(output_row)
-        #print("name: ", key, statistics[key])
+
+
+    #stats = []
+
+    #for key in statistics.keys():
+        #output_row = []
+        #output_row.append(key)
+        #output_row.append(statistics[key])
+        #output_row.append(1-statistics[key])
+        #stats.append(output_row)
+        ##print("name: ", key, statistics[key])
 
     
     #print(stats)
@@ -50,12 +87,15 @@ def read_stats():
 
 
 def write_statistics():
+    read_stats()
+
+
     with open ('/Users/rujuta/work/ucsc-research-01/statistics.csv', 'w', newline='') as output:
         stats = read_stats()
 
         writer = c.writer(output)
 
-        writer.writerow(['name', 'black_percentage', 'white_percentage'])
+        writer.writerow(['name', 'black_percentage', 'x_axis', 'y_axis'])
 
         writer.writerows(stats)
         

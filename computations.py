@@ -15,6 +15,7 @@ def get_black_occurences():
     
         black_counts[f] = all_black_first_names.count(f)
     
+
     #print(black_counts)
 
     return black_counts #each black name and how many time it occurs
