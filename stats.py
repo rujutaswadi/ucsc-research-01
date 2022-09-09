@@ -5,15 +5,12 @@ def calculations(black_occurences, white_occurences):
     black_names = black_occurences.keys()
     white_names = white_occurences.keys()
 
-    for name in black_names:
-        unique_names.append(name)
-        #print(name)
-    for name in white_names:
-        if name in unique_names:
-            break
-        else:
-            print('new name', name)
-            unique_names.append(name)
+    for b_name in black_names:
+        unique_names.append(b_name)
+    for w_name in white_names:
+        if w_name not in unique_names:
+            #print(w_name)
+            unique_names.append(w_name)
     
     black_percentage = {}
     x_axis = {}
@@ -31,8 +28,8 @@ def calculations(black_occurences, white_occurences):
         
         black_percentage[name] = (black_count) / (black_count + white_count)
         
-        if name in black_names:
-            x_axis[name] = black_count / (black_count + white_count) #AA name/people with that name
+        
+        x_axis[name] = black_count / (black_count + white_count) #AA name/people with that name
     
         total_people = total_people + black_count + white_count
 
@@ -49,7 +46,7 @@ def calculations(black_occurences, white_occurences):
         else:
             white_count = 0
 
-        y_axis[name] = (black_count + white_count) / total_people
+        y_axis[name] = (black_count + white_count) / total_people #frequency
     
     #return black_percentage #add x axis, add y axis
     return unique_names, black_percentage, x_axis, y_axis
@@ -58,34 +55,21 @@ def read_stats():
     black_counts = comp.get_black_occurences()
     white_counts = comp.get_white_occurences()
 
-    #statistics = calculations(black_counts, white_counts)
-
     unique_names, black_percentage, x_axis, y_axis = calculations(black_counts, white_counts)
     
 
     stats = []
 
     for name in unique_names:
+        #print(name)
         output_row = []
+
         output_row.append(name)
-        if name in black_percentage.keys():
-            output_row.append(black_percentage[name]) #what happens if name not in black names
-        else:
-            output_row.append(0) #what happens if name not in black names
+        output_row.append(black_percentage[name])
         output_row.append(x_axis[name])
         output_row.append(y_axis[name])
+
         stats.append(output_row)
-
-
-    #stats = []
-
-    #for key in statistics.keys():
-        #output_row = []
-        #output_row.append(key)
-        #output_row.append(statistics[key])
-        #output_row.append(1-statistics[key])
-        #stats.append(output_row)
-        ##print("name: ", key, statistics[key])
 
     
     #print(stats)
