@@ -1,7 +1,9 @@
+#by Rujuta Swadi (2022)
+
 import csv as c
 
 def read_black_file():
-    with open("/Users/rujuta/Desktop/research_project/black_names_sample.csv") as black_names:
+    with open("black_names_sample.csv") as black_names:
         name_reader = c.reader(black_names)
 
         names = []
@@ -61,7 +63,7 @@ def read_black_file():
     return names #all first and last names for black people
 
 def read_white_file():
-    with open("/Users/rujuta/Desktop/research_project/white_names_sample.csv") as white_names:
+    with open("white_names_sample.csv") as white_names:
         name_reader = c.reader(white_names)
 
         names = []

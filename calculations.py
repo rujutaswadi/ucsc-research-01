@@ -1,7 +1,9 @@
+#by Rujuta Swadi (2022)
+
 import csv as c
 
 def read_black_file():
-    with open("/Users/rujuta/Desktop/research_project/black_names_sample.csv") as black_names:
+    with open("black_names_sample.csv") as black_names:
         name_reader = c.reader(black_names)
 
         names = []
@@ -81,7 +83,7 @@ def get_black_occurences():
 
 
 def write_black_names():
-    with open ('/Users/rujuta/Desktop/research_project/black_names_samples_output.csv', 'w', newline='') as output:
+    with open ('black_names_samples_output.csv', 'w', newline='') as output:
         names = read_black_file()
         
         writer = c.writer(output)
@@ -91,7 +93,7 @@ def write_black_names():
         writer.writerows(names)
     
 def read_white_file():
-    with open("/Users/rujuta/Desktop/research_project/white_names_sample.csv") as white_names:
+    with open("white_names_sample.csv") as white_names:
         name_reader = c.reader(white_names)
 
         names = []
@@ -168,7 +170,7 @@ def get_white_occurences():
     #print(white_counts)
 
 def write_white_names():
-    with open ('/Users/rujuta/Desktop/research_project/white_names_samples_output.csv', 'w', newline='') as output:
+    with open ('white_names_samples_output.csv', 'w', newline='') as output:
        names = read_white_file()
        
        writer = c.writer(output)
@@ -188,7 +190,7 @@ def calculations(black_occurences, white_occurences):
     for name in black_names:
         unique_names.append(name)
     for name in white_names:
-        if name in unique_names == False: #can i say if not key in unique_names?
+        if name in unique_names == False:
             unique_names.append(name)
     
     statistics = {}
@@ -230,7 +232,7 @@ def read_stats():
 
 
 def write_statistics():
-    with open ('/Users/rujuta/Desktop/research_project/statistics.csv', 'w', newline='') as output:
+    with open ('statistics.csv', 'w', newline='') as output:
         stats = read_stats()
 
         writer = c.writer(output)
@@ -238,5 +240,3 @@ def write_statistics():
         writer.writerow(['name', 'black_percentage', 'white_percentage'])
 
         writer.writerows(stats)
-
-#write_statistics() #runs everything

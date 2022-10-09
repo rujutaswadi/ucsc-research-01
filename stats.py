@@ -1,3 +1,5 @@
+#by Rujuta Swadi (2022)
+
 import csv as c, computations as comp
 
 def calculations(black_occurences, white_occurences):
@@ -81,7 +83,7 @@ def write_statistics():
     read_stats()
 
 
-    with open ('/Users/rujuta/work/ucsc-research-01/statistics.csv', 'w', newline='') as output:
+    with open ('statistics.csv', 'w', newline='') as output:
         stats = read_stats()
 
         writer = c.writer(output)
